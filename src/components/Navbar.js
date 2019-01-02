@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 const Navbar = () => {
     return(
+        
     <Router>
         <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light ">

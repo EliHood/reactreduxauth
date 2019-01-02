@@ -13,19 +13,20 @@ class SignUp extends Component {
     //       [e.target.name] : e.target.value
     //   })
     // }
-    // handleSubmit = (e) =>{
-    //     e.preventDefault();
-    //     this.props.signUp(this.state);
-    //     // (register === true) && this.props.history.push('/');
-    //     // console.log(this.state);
-    // }
+    handleSubmit = (e) =>{
+        e.preventDefault();
+        const register = this.props.signUp();
+        (register === true) && this.props.history.push('/');
+        console.log(this.state);
+       
+    }
     render() {
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
                         <h1>Sign Up</h1>
-                        <div onClick={this.props.signUp}>
+                        <div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Email address</label>
                                 <input
@@ -49,7 +50,7 @@ class SignUp extends Component {
                                     placeholder="Password"/>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>
                         </div>
                     </div>
 

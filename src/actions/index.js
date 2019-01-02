@@ -40,6 +40,8 @@ export const signUp = () => (dispatch, getState) => {
                         let errorMessage = error.message;
                         alert(errorMessage)
                 });
+            
+   
 
     }
 
