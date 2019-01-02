@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction } from '../actions/';
 class SignUp extends Component {
@@ -19,10 +19,15 @@ class SignUp extends Component {
     const creds = {_email, _password}
     if(creds){
       this.props.signUp(creds);
+      this.setState({
+        _email: '',
+        _password: ''
+      });
       this.props.history.push('/');
       console.log(creds);
+     
     }
-
+  
 
   }
   render() {
@@ -31,11 +36,11 @@ class SignUp extends Component {
         <div className="row">
           <div className="col-md-6">
             <h1>Sign Up</h1>
-            <form onSubmit={this.handleSubmit}>
+            <form  onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
-                  type="email"
+                  type="email"          
                   className="form-control"
                   id="email"
                   onChange={this.props.onEmailSignUpChangeAction}

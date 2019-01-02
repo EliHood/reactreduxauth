@@ -28,10 +28,10 @@ export const onEmptySignUpPasswordClick = () => ({
 export const signUp = (user) => { return (dispatch) => {
 
     if (user._email === '') {
-        dispatch({ type: EMPTY_SIGN_UP_EMAIL })
+        dispatch( onEmptySignUpEmailClick())
     }
     else if (user._password === '') { 
-        dispatch({ type: EMPTY_SIGN_UP_PASSWORD })
+        dispatch( onEmptySignUpPasswordClick())
      }
     else {
         firebaseAuth.createUserWithEmailAndPassword(user._email, user._password)
