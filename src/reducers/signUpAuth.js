@@ -13,12 +13,12 @@ export default (state = initialState, action) => {
         case EMAIL_SIGN_UP_CHANGE:
             return {
                 ...state,
-                emailSignUp: action.email
+                _email: action.email
             }
         case PASSWORD_SIGN_UP_CHANGE:
             return {
                 ...state,
-                passwordSignUp: action.password
+                _password: action.password
             }
         case EMPTY_SIGN_UP_EMAIL:
             return {

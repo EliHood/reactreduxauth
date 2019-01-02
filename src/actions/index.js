@@ -25,16 +25,16 @@ export const onEmptySignUpPasswordClick = () => ({
     type: EMPTY_SIGN_UP_PASSWORD
 })
 
-export const signUp = (email, password) => { return (dispatch) => {
+export const signUp = (user) => { return (dispatch) => {
 
-    if (email === '') {
+    if (user._email === '') {
         dispatch({ type: EMPTY_SIGN_UP_EMAIL })
     }
-    else if (password === '') { 
+    else if (user._password === '') { 
         dispatch({ type: EMPTY_SIGN_UP_PASSWORD })
      }
     else {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.createUserWithEmailAndPassword(user._email, user._password)
             .then(() => console.log('signUpok'))
                 .catch( function (error) {
                         let errorCode = error.code;

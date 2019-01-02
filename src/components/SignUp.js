@@ -15,12 +15,12 @@ class SignUp extends Component {
   // }
   handleSubmit = (e) => {
     e.preventDefault();
-    const register = [this.props.emailSignUp, this.props.passwordSignUp]
-
-    if(register){
-      this.props.signUp(this.props.emailSignUp, this.props.passwordSignUp);
+    const {_email, _password} = this.props;
+    const creds = {_email, _password}
+    if(creds){
+      this.props.signUp(creds);
       this.props.history.push('/');
-      console.log(register);
+      console.log(creds);
     }
 
 
@@ -40,7 +40,7 @@ class SignUp extends Component {
                   id="email"
                   onChange={this.props.onEmailSignUpChangeAction}
                   aria-describedby="emailHelp"
-                  value={this.props.emailSignUp}
+                  value={this.props._email}
                   placeholder="Enter email" />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
@@ -50,7 +50,7 @@ class SignUp extends Component {
                   type="password"
                   className="form-control"
                   id="password"
-                  value={this.props.passwordSignUp}
+                  value={this.props._password}
                   onChange={this.props.onPasswordSignUpChangeAction}
                   placeholder="Password" />
               </div>
@@ -69,13 +69,13 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
-  emailSignUp: state.signUpAuth.emailSignUp,
-  passwordSignUp: state.signUpAuth.passwordSignUp
+  _email: state.signUpAuth._email,
+  _password: state.signUpAuth._password
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signUp: (email, password) => dispatch(signUp(email, password)),
+  signUp: (user) => dispatch(signUp(user)),
   onEmailSignUpChangeAction: (event) => dispatch(onEmailSignUpChangeAction(event.target.value)),
   onPasswordSignUpChangeAction: (event) => dispatch(onPasswordSignUpChangeAction(event.target.value)),
 });
