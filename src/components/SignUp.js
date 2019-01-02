@@ -25,7 +25,7 @@ class SignUp extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <h1>Sign Up</h1>
-                        <form onSubmit={this.props.signUp}>
+                        <div onClick={this.props.signUp}>
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Email address</label>
                                 <input
@@ -50,7 +50,7 @@ class SignUp extends Component {
                             </div>
 
                             <button type="submit" className="btn btn-primary">Submit</button>
-                        </form>
+                        </div>
                     </div>
 
                 </div>
