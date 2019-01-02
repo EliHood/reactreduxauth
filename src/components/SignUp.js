@@ -16,7 +16,7 @@ class SignUp extends Component {
     handleSubmit = (e) =>{
         e.preventDefault();
         const register = this.props.signUp();
-        (register === true) && this.props.history.push('/');
+        (register === true) && this.props.history.push('/SignIn');
         console.log(this.state);
        
     }
