@@ -2,6 +2,8 @@ import { auth as firebaseAuth } from '../firebaseConfig'
 
 export const EMAIL_SIGN_UP_CHANGE = 'EMAIL_SIGN_UP_CHANGE';
 export const PASSWORD_SIGN_UP_CHANGE = 'PASSWORD_SIGN_UP_CHANGE';
+export const EMPTY_SIGN_UP_EMAIL = 'EMPTY_SIGN_UP_EMAIL';
+export const EMPTY_SIGN_UP_PASSWORD = 'EMPTY_SIGN_UP_PASSWORD';
 
 export const onEmailSignUpChangeAction = value => ({
     type: EMAIL_SIGN_UP_CHANGE,
@@ -16,36 +18,33 @@ export const onPasswordSignUpChangeAction = value => ({
 
 
 export const onEmptySignUpEmailClick = () => ({
-    type: 'EMPTY_SIGN_UP_EMAIL'
+    type:  EMPTY_SIGN_UP_EMAIL
 })
 
 export const onEmptySignUpPasswordClick = () => ({
-    type: 'EMPTY_SIGN_UP_PASSWORD'
+    type: EMPTY_SIGN_UP_PASSWORD
 })
 
-export const signUp = () => (dispatch, getState) => {
-    const {signUpAuth} = getState();
-    if (signUpAuth.emailSignUp === '') {
-        dispatch(onEmptySignUpEmailClick())
+export const signUp = (email, password) => { return (dispatch) => {
+
+    if (email === '') {
+        dispatch({ type: EMPTY_SIGN_UP_EMAIL })
     }
-    if (signUpAuth.passwordSignUp === '') { 
-        dispatch(onEmptySignUpPasswordClick())
+    else if (password === '') { 
+        dispatch({ type: EMPTY_SIGN_UP_PASSWORD })
      }
     else {
-
-        firebaseAuth.createUserWithEmailAndPassword(signUpAuth.emailSignUp, signUpAuth.passwordSignUp)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
             .then(() => console.log('signUpok'))
                 .catch( function (error) {
                         let errorCode = error.code;
                         let errorMessage = error.message;
                         alert(errorMessage)
                 });
-            
-   
-
+    
+    
+    
+        }
+      }
     }
-
-}
-
-
 
