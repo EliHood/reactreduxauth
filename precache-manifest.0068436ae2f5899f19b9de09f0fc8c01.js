@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "8fc7ee18ad6316fa43dc",
+    "revision": "55df809dc8a33b7a4602",
     "url": "/reactreduxauth/static/css/main.8276f604.chunk.css"
   },
   {
-    "revision": "8fc7ee18ad6316fa43dc",
-    "url": "/reactreduxauth/static/js/main.8fc7ee18.chunk.js"
+    "revision": "55df809dc8a33b7a4602",
+    "url": "/reactreduxauth/static/js/main.55df809d.chunk.js"
   },
   {
     "revision": "663515b4f39f1823b529",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/reactreduxauth/static/js/runtime~main.6bfdbf41.js"
   },
   {
-    "revision": "c179210e4d639dba3bc04c453c853cfc",
+    "revision": "b2a00d7ff441a1865f4abd9f2cb943f4",
     "url": "/reactreduxauth/index.html"
   }
 ];
