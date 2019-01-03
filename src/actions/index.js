@@ -27,15 +27,15 @@ export const onEmptySignUpPasswordClick = () => ({
 
 export const signUp = (user) => { return (dispatch) => {
 
-    if (user._email === '') {
+    if (user.email === '') {
         dispatch( onEmptySignUpEmailClick())
     }
-    else if (user._password === '') { 
+    else if (user.password === '') { 
         dispatch( onEmptySignUpPasswordClick())
-     }
+    }
     else {
-        firebaseAuth.createUserWithEmailAndPassword(user._email, user._password)
-            .then(() => console.log('signUpok'))
+        firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
+            .then(userInfo => userInfo )
                 .catch( function (error) {
                         let errorCode = error.code;
                         let errorMessage = error.message;
@@ -45,6 +45,30 @@ export const signUp = (user) => { return (dispatch) => {
     
     
         }
-      }
+    }
+}
+
+export const signIn = (user) => { return (dispatch) => {
+
+    if (user._email === '') {
+        dispatch( onEmptySignUpEmailClick())
+    }
+    else if (user._password === '') { 
+        dispatch( onEmptySignUpPasswordClick())
+        }
+    else {
+        firebaseAuth.signInWithEmailAndPassword(user._email, user._password)
+            .then(() =>  dispatch({ type: 'SIGNUP_SUCCESS' }))
+                .catch( function (error) {
+                        let errorCode = error.code;
+                        let errorMessage = error.message;
+                        alert(errorMessage)
+                });
+    
+    
+    
+        }
+        }
     }
 
+    

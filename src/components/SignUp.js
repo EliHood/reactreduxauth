@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import { signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction } from '../actions/';
 class SignUp extends Component {
-  state = {
-    email: "",
-    password: ""
+  constructor(props){
+    super(props);
+    this.state = {
+      message: '',
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // onChange = (e) =>{
-  //   this.setState({
-  //       [e.target.name] : e.target.value
-  //   })
-  // }
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const {_email, _password} = this.props;
-    const creds = {_email, _password}
+  onChange = (e) =>{
+    this.setState({
+        [e.target.name] : e.target.value
+    })
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const email = this.email.value;
+    const password = this.password.value;
+    const creds = {email, password}
     if(creds){
       this.props.signUp(creds);
-      this.setState({
-        _email: '',
-        _password: ''
-      });
+    
       this.props.history.push('/');
       console.log(creds);
-     
     }
-  
-
   }
+
   render() {
     return (
       <div className="container">
@@ -40,23 +42,23 @@ class SignUp extends Component {
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
+                  name="email"
                   type="email"          
                   className="form-control"
                   id="email"
-                  onChange={this.props.onEmailSignUpChangeAction}
+                  ref={(input) => this.email = input}
                   aria-describedby="emailHelp"
-                  value={this.props._email}
                   placeholder="Enter email" />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Password</label>
                 <input
+                  name="password"
                   type="password"
+                  ref={(input) => this.password = input}
                   className="form-control"
-                  id="password"
-                  value={this.props._password}
-                  onChange={this.props.onPasswordSignUpChangeAction}
+                  id="password"    
                   placeholder="Password" />
               </div>
 
@@ -74,16 +76,13 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
-  _email: state.signUpAuth._email,
-  _password: state.signUpAuth._password
+
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signUp: (user) => dispatch(signUp(user)),
-  onEmailSignUpChangeAction: (event) => dispatch(onEmailSignUpChangeAction(event.target.value)),
-  onPasswordSignUpChangeAction: (event) => dispatch(onPasswordSignUpChangeAction(event.target.value)),
-});
+  signUp: (user) => dispatch(signUp(user))
 
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
