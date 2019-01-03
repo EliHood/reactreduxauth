@@ -27,7 +27,7 @@ class SignUp extends Component {
       this.props.signUp(creds);
     
       this.props.history.push('/');
-      console.log(creds);
+      // console.log(creds);
     }
   }
 
