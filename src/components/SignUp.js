@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
 import { signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction } from '../actions/';
 class SignUp extends Component {
   constructor(props){
