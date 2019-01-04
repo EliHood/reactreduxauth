@@ -1,87 +1,117 @@
-import React, { Component } from 'react';
-import { withRouter} from "react-router-dom";
-import { connect } from "react-redux";
-import { signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction } from '../actions/';
+import React, {Component} from 'react';
+import {withRouter, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction} from '../actions/';
+import '../App.css';
+import { history } from '../components/Navbar';
+
 class SignUp extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      message: '',
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            formData: { // set up default form values
+                email: "",
+                password: ""
+            },
+            errors: {}
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    handleChange = (event) => {
+        const {formData} = this.state;
 
-  onChange = (e) =>{
-    this.setState({
-        [e.target.name] : e.target.value
-    })
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-
-    const email = this.email.value;
-    const password = this.password.value;
-    const creds = {email, password}
-    if(creds){
-      this.props.signUp(creds);
-    
-      this.props.history.push('/');
-      // console.log(creds);
+        this.setState({
+            formData: {
+                ...formData, // leave other values unchanged
+                [event.target.name]: event.target.value, // update the changed value
+            }
+        });
     }
-  }
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <h1>Sign Up</h1>
-            <form  onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input
-                  name="email"
-                  type="email"          
-                  className="form-control"
-                  id="email"
-                  ref={(input) => this.email = input}
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email" />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  ref={(input) => this.password = input}
-                  className="form-control"
-                  id="password"    
-                  placeholder="Password" />
-              </div>
+    // ...
+    handleSubmit(event) {
+        event.preventDefault();
 
-              <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-          </div>
+        const {formData, errors} = this.state;
+        const {email, password} = formData;
 
-        </div>
-      </div>
+        const myError = this.props.authError;
+        const creds = {
+            email,
+            password
+        }
+        const register =  this.props.signUp(creds);
+        if (register) {
+     
+            console.log(creds);
 
-    );
-  }
+        }
+    }
 
+    render() {
+        const {authError} = this.props
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6">
+                        <h1>Sign Up</h1>
+                        <div className="center red-text">
+                            {authError
+                                ? <p>
+                                        {authError}
+                                    </p>
+                                : null}
+                        </div>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Email address</label>
+                                <input
+                                    name="email"
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    value={this.state.formData.email}
+                                    onChange={this.handleChange}
+                                    aria-describedby="emailHelp"
+                                    placeholder="Enter email"/>
+                                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <div></div>
+                                <input
+                                    name="password"
+                                    type="password"
+                                    value={this.state.formData.password}
+                                    onChange={this.handleChange}
+                                    className="form-control"
+                                    id="password"
+                                    placeholder="Password"/>
+
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
-
-
+  user: state.auth.user, 
+  authError: state.signUpAuth.authError
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signUp: (user) => dispatch(signUp(user))
+    signUp: (user) => dispatch(signUp(user))
 
 });
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));

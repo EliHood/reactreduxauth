@@ -1,35 +1,25 @@
-import { PASSWORD_SIGN_UP_CHANGE, EMAIL_SIGN_UP_CHANGE, EMPTY_SIGN_UP_EMAIL, EMPTY_SIGN_UP_PASSWORD} from '../actions';
 
 const initialState = {
     emailSignUp: '',
     passwordSignUp: '',
-    errorTextEmailSignUp: '',
-    errorTextPasswordSignUp: ''
+    authError: null
 
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case EMAIL_SIGN_UP_CHANGE:
-            return {
+        case 'SIGNUP_SUCCESS':      
+            return ({
                 ...state,
-                _email: action.email
-            }
-        case PASSWORD_SIGN_UP_CHANGE:
-            return {
+                authError: null
+            })
+
+        case 'SIGNUP_ERROR':
+            console.log('signup error')
+            return ({
                 ...state,
-                _password: action.password
-            }
-        case EMPTY_SIGN_UP_EMAIL:
-            return {
-                ...state,
-                errorTextEmailSignUp: 'This field is required'
-            }
-        case EMPTY_SIGN_UP_PASSWORD:
-            return {
-                ...state,
-                errorTextPasswordSignUp: 'This field is required'
-            }
+                authError: action.err.message
+            })
         default:
             return state
     }
