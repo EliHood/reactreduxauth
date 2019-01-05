@@ -4,7 +4,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({forceRefresh:true});
 
 const Navbar = () => {
     return(
