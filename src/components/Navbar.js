@@ -35,7 +35,7 @@ const Navbar = () => {
         </nav>
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignIn" component={SignIn} />
-        <Route path="/" />
+        <Route path="/reactreduxauth" />
         
     </div>
     </Router>
