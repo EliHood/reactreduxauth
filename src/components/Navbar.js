@@ -39,7 +39,7 @@ const Navbar = () => {
         </nav>
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignIn" component={SignIn} />
-        <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/" />
         
     </div>

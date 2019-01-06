@@ -1,13 +1,26 @@
 import { auth as firebaseAuth } from '../firebaseConfig'
+import {fire} from '../firebaseConfig'
 import { push } from 'react-router-redux';
 import { history } from '../components/Navbar';
+import { getFirebase } from 'react-redux-firebase';
+
+export const SET_USER = "SET_USER";
 
 export const signUp = (user) => { return (dispatch) => {
     firebaseAuth.createUserWithEmailAndPassword(user.email.trim(), user.password)
+     .then(resp => {
+            return fire.collection('users').doc(resp.user.uid).set({
+              email: user.email,
+              password: user.password,
+              uid: resp.user.uid
+             
+            });
+          })
         .then(() => {
-            dispatch({ type: 'SIGNUP_SUCCESS' })
-        }).then((response) => {
-            history.push('/');
+            dispatch({ type: 'SIGNUP_SUCCESS' });
+          })
+        .then((response) => {
+            history.push('/dashboard');
         }).catch((err) => {
             dispatch({ type: 'SIGNUP_ERROR', err});
         });
@@ -30,3 +43,18 @@ export const signIn = (user) => { return (dispatch) => {
     }
    
 }
+
+export const CurrentUser = () => dispatch => {
+    firebaseAuth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log(user.uid)
+            dispatch({
+                type: SET_USER, 
+                payload: user
+            }); 
+        }
+      });
+    
+}
+
+

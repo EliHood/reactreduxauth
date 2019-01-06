@@ -1,13 +1,20 @@
 
+import { SET_USER} from '../actions/';
+import { CurrentUser } from "../actions";
+
 const initialState = {
     emailSignUp: '',
     passwordSignUp: '',
-    authError: null
-
+    authError: null,
+    isAuthenticated: false,
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case SET_USER:
+            return action.payload || null;
+            
+
         case 'SIGNUP_SUCCESS':      
             return ({
                 ...state,

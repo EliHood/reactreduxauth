@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar';
-
-
+import { CurrentUser } from "./actions";
+import { connect } from "react-redux";
 
 
 class App extends Component {
-
+    componentWillMount() {
+        this.props.CurrentUser();
+    }
   render(){
       return(
           <Navbar />
@@ -13,6 +15,8 @@ class App extends Component {
   }
 
 }
-export default App;
+
+
+export default connect(null, { CurrentUser })(App);
 
 

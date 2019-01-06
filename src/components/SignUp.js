@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {signUp, onEmailSignUpChangeAction, onPasswordSignUpChangeAction} from '../actions/';
+import {signUp, CurrentUser, onEmailSignUpChangeAction, onPasswordSignUpChangeAction} from '../actions/';
 import '../App.css';
 import { history } from '../components/Navbar';
 
@@ -20,9 +20,6 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    UNSAFE_componentWillMount(){
-        console.log();
-    }
 
     handleChange = (event) => {
         const {formData} = this.state;
@@ -45,17 +42,13 @@ class SignUp extends Component {
             password
         }
         // console.log(creds);
-        const register =  this.props.signUp(creds);
-        if (register) {
-     
-            // console.log(creds);
-
-        }
+       this.props.signUp(creds);
+   
     }
 
     render() {
         const {authError, user} = this.props
-        if (user.uid) return <Redirect to='/' />
+        if (user) return <Redirect to='/dashboard' />
         return (
             
             <div className="container">
