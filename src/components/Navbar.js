@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import createBrowserHistory from 'history/createBrowserHistory';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import Dashboard from './Dashboard';
 
 export const history = createBrowserHistory({forceRefresh:true});
 
@@ -23,6 +24,9 @@ const Navbar = () => {
                     <Link  className="nav-link" to="/">Home </Link>
                 </li>  
                 <li className="nav-item">
+                    <Link  className="nav-link" to="/dashboard">Dashboard </Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/SignUp">Sign Up </Link>
                 </li>
                 <li className="nav-item">
@@ -35,7 +39,8 @@ const Navbar = () => {
         </nav>
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignIn" component={SignIn} />
-        <Route path="/reactreduxauth" />
+        <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/" />
         
     </div>
     </Router>

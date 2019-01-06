@@ -20,6 +20,10 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    UNSAFE_componentWillMount(){
+        console.log();
+    }
+
     handleChange = (event) => {
         const {formData} = this.state;
 
@@ -34,26 +38,26 @@ class SignUp extends Component {
     // ...
     handleSubmit(event) {
         event.preventDefault();
-
-        const {formData, errors} = this.state;
-        const {email, password} = formData;
-
-        const myError = this.props.authError;
-        const creds = {
+        const {formData, errors}=this.state;
+        let  {email, password} = formData;
+        let creds = {
             email,
             password
         }
+        // console.log(creds);
         const register =  this.props.signUp(creds);
         if (register) {
      
-            console.log(creds);
+            // console.log(creds);
 
         }
     }
 
     render() {
-        const {authError} = this.props
+        const {authError, user} = this.props
+        if (user.uid) return <Redirect to='/' />
         return (
+            
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
@@ -104,8 +108,8 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user, 
-  authError: state.signUpAuth.authError
+  user: state.firebase.auth,
+  authError: state.auths.authError
 })
 
 const mapDispatchToProps = (dispatch) => ({

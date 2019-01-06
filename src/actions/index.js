@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { history } from '../components/Navbar';
 
 export const signUp = (user) => { return (dispatch) => {
-    firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
+    firebaseAuth.createUserWithEmailAndPassword(user.email.trim(), user.password)
         .then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' })
         }).then((response) => {
@@ -19,18 +19,14 @@ export const signUp = (user) => { return (dispatch) => {
 
 export const signIn = (user) => { return (dispatch) => {
 
-        firebaseAuth.signInWithEmailAndPassword(user._email, user._password)
-            .then(() =>  dispatch({ type: 'SIGNUP_SUCCESS' }))
-                .catch( function (error) {
-                        let errorCode = error.code;
-                        let errorMessage = error.message;
-                        alert(errorMessage)
-                });
-    
-    
-    
-        }
-        
+    firebaseAuth.signInWithEmailAndPassword(user.email, user.password)
+        .then(()=> {
+            dispatch({type: 'SIGNIN_SUCCESS'})
+        }).then((response) => {
+            history.push('/dashboard');
+        }).catch( (err) => {
+            dispatch({ type: 'SIGNIN_ERROR', err});
+        });
+    }
+   
 }
-
-    

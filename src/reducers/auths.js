@@ -20,6 +20,20 @@ export default (state = initialState, action) => {
                 ...state,
                 authError: action.err.message
             })
+
+        case 'SIGNIN_SUCCESS':
+            console.log('signin success')
+            return ({
+                ...state,
+                authError: null
+            })
+
+        case 'SIGNIN_ERROR':
+            console.log('signin error')
+            return ({
+                ...state,
+                authError: action.err.message
+            })
         default:
             return state
     }

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router } from 'react-router-dom';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(

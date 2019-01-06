@@ -1,11 +1,12 @@
-import authReducer from './signUpAuth';
+import authReducer from './auths';
 import { combineReducers } from 'redux';
 import auth, { initAuthStateListening } from './auth'
+import {firebaseReducer } from 'react-redux-firebase';
 
 
 const rootReducer = combineReducers({
-    signUpAuth: authReducer,
-    auth
+    auths: authReducer,
+    firebase: firebaseReducer
 })
 
 export default rootReducer
