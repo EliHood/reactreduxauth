@@ -6,6 +6,7 @@ import SignIn from './SignIn';
 import { connect } from 'react-redux'
 import {signOut} from '../actions/';
 import Dashboard from './Dashboard';
+import PropTypes, { func, bool} from 'prop-types';
 
 export const history = createBrowserHistory({forceRefresh:true});
 
@@ -68,6 +69,11 @@ const mapDispatchToProps = (dispatch) => ({
     signOut: () => dispatch(signOut())
 
 });
+
+Navbar.propTypes = {
+    isAuthenticated:PropTypes.bool,
+    signOut:PropTypes.func
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 

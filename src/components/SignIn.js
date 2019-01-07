@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {signIn} from  '../actions/';
-
+import PropTypes, { func, bool} from 'prop-types';
 class SignIn extends Component{
 
     constructor(props){
@@ -105,12 +105,16 @@ const mapStateToProps = (state) => ({
     user: state.firebase.auth,
     authError: state.auths.authError,
     userId: state.auths.userId
-  })
+})
   
-  const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
       signIn: (user) => dispatch(signIn(user))
   
-  });
-  
+});
+
+  SignIn.propTypes = {
+    signIn: PropTypes.func,
+    userId: PropTypes.string,
+  }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {signUp, CurrentUser, onEmailSignUpChangeAction, onPasswordSignUpChangeAction} from '../actions/';
 import '../App.css';
 import { history } from '../components/Navbar';
-
+import PropTypes, { func, bool} from 'prop-types';
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -19,8 +19,6 @@ class SignUp extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
- 
 
     handleChange = (event) => {
         const {formData} = this.state;
@@ -112,5 +110,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
+SignUp.propTypes = {
+    signUp: PropTypes.func,
+    userId: PropTypes.string,
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
