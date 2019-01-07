@@ -38,10 +38,12 @@ const Navbar = (props) => {
                     <li className="nav-item">
                         <Link className="nav-link" to="/SignUp">Sign Up </Link>
                     </li>
+                    
                 )}
           
-                <button className="btn btn-outline-primary btn-sm" onClick={() => props.signOut()}>Log out</button>
-
+                {props.isAuthenticated && (   
+                    <button className="btn btn-outline-primary btn-sm" onClick={() => props.signOut()}>Log out</button>
+                )}
             </ul>
           </div>
         </nav>
