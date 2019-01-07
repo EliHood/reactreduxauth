@@ -20,10 +20,7 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // UNSAFE_componentWillMount(){
-    //     console.log(this.props.userId);
-    // }
-
+ 
 
     handleChange = (event) => {
         const {formData} = this.state;

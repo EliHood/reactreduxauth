@@ -1,10 +1,7 @@
-
 import { SET_USER} from '../actions/';
 import { CurrentUser } from "../actions";
 
 const initialState = {
-    emailSignUp: '',
-    passwordSignUp: '',
     authError: null,
     isAuthenticated: false,
     userId: null
