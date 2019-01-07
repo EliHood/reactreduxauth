@@ -28,14 +28,19 @@ const Navbar = (props) => {
                 <li className="nav-item">
                     <Link  className="nav-link" to="/dashboard">Dashboard </Link>
                 </li>
-                <li className="nav-item">
-                    <Link  className="nav-link" to="/SignIn">Sign-In</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/SignUp">Sign Up </Link>
-                </li>
-           
-                <button className="btn btn-outline-primary" onClick={() => props.signOut()}>Log out</button>
+
+                {!props.isAuthenticated && (
+                    <li className="nav-item">
+                        <Link  className="nav-link" to="/SignIn">Sign-In</Link>
+                    </li>
+                )}
+                {!props.isAuthenticated && (        
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/SignUp">Sign Up </Link>
+                    </li>
+                )}
+          
+                <button className="btn btn-outline-primary btn-sm" onClick={() => props.signOut()}>Log out</button>
 
             </ul>
           </div>
@@ -49,11 +54,18 @@ const Navbar = (props) => {
     );
 
 }
+
+const mapStateToProps = (state) => ({
+
+    isAuthenticated: state.auths.isAuthenticated
+
+});
+
 const mapDispatchToProps = (dispatch) => ({
 
     signOut: () => dispatch(signOut())
 
 });
 
-export default connect(null, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 

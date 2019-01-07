@@ -14,14 +14,16 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case SET_USER:
             return ({
-                userId: action.payload.uid || null   
+                userId: action.payload.uid || null,
+                isAuthenticated: true
             })
             
         case 'LOGOUT_SUCCESS':
             console.log('signout success')
             return ({
                 ...state,
-                userId: null
+                userId: null,
+                isAuthenticated: false
             })    
 
         case 'SIGNUP_SUCCESS':      
