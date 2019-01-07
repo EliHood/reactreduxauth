@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import createBrowserHistory from 'history/createBrowserHistory';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import { connect } from 'react-redux'
+import {signOut} from '../actions/';
 import Dashboard from './Dashboard';
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-const Navbar = () => {
+const Navbar = (props) => {
     return(
         
     <Router history={history}>
@@ -27,12 +29,13 @@ const Navbar = () => {
                     <Link  className="nav-link" to="/dashboard">Dashboard </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/SignUp">Sign Up </Link>
+                    <Link  className="nav-link" to="/SignIn">Sign-In</Link>
                 </li>
                 <li className="nav-item">
-                    <Link  className="nav-link" to="/SignIn">Sign In </Link>
+                    <Link className="nav-link" to="/SignUp">Sign Up </Link>
                 </li>
-              
+           
+                <button className="btn btn-outline-primary" onClick={() => props.signOut()}>Log out</button>
 
             </ul>
           </div>
@@ -40,12 +43,17 @@ const Navbar = () => {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/" />
-        
+       
     </div>
     </Router>
     );
 
 }
+const mapDispatchToProps = (dispatch) => ({
 
-export default Navbar;
+    signOut: () => dispatch(signOut())
+
+});
+
+export default connect(null, mapDispatchToProps)(Navbar)
+

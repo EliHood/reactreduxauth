@@ -7,13 +7,22 @@ const initialState = {
     passwordSignUp: '',
     authError: null,
     isAuthenticated: false,
+    userId: null
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case SET_USER:
-            return action.payload || null;
+            return ({
+                userId: action.payload.uid || null   
+            })
             
+        case 'LOGOUT_SUCCESS':
+            console.log('signout success')
+            return ({
+                ...state,
+                userId: null
+            })    
 
         case 'SIGNUP_SUCCESS':      
             return ({

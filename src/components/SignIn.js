@@ -52,7 +52,8 @@ class SignIn extends Component{
 
 
     render(){
-        const {authError} = this.props
+        const {authError,userId} = this.props
+        if (userId) return <Redirect to='/dashboard' />
         return(
             <div className="container">
             <div className="row">
@@ -102,7 +103,8 @@ class SignIn extends Component{
 
 const mapStateToProps = (state) => ({
     user: state.firebase.auth,
-    authError: state.auths.authError
+    authError: state.auths.authError,
+    userId: state.auths.userId
   })
   
   const mapDispatchToProps = (dispatch) => ({

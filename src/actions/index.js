@@ -44,10 +44,18 @@ export const signIn = (user) => { return (dispatch) => {
    
 }
 
+export const signOut = () => { return (dispatch) => {
+
+        firebaseAuth.signOut().then(() => {
+            dispatch({ type: 'LOGOUT_SUCCESS'})
+        })
+    }
+}
+
+
 export const CurrentUser = () => dispatch => {
     firebaseAuth.onAuthStateChanged((user) => {
         if (user) {
-          console.log(user.uid)
             dispatch({
                 type: SET_USER, 
                 payload: user

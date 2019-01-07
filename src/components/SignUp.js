@@ -20,6 +20,10 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    // UNSAFE_componentWillMount(){
+    //     console.log(this.props.userId);
+    // }
+
 
     handleChange = (event) => {
         const {formData} = this.state;
@@ -47,8 +51,8 @@ class SignUp extends Component {
     }
 
     render() {
-        const {authError, user} = this.props
-        if (user) return <Redirect to='/dashboard' />
+        const {authError, userId} = this.props
+        if (userId) return <Redirect to='/dashboard' />
         return (
             
             <div className="container">
@@ -102,7 +106,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.firebase.auth,
-  authError: state.auths.authError
+  authError: state.auths.authError,
+  userId: state.auths.userId
 })
 
 const mapDispatchToProps = (dispatch) => ({
