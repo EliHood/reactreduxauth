@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import createBrowserHistory from 'history/createBrowserHistory';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import Post from './Post';
 import { connect } from 'react-redux'
 import {signOut} from '../actions/';
 import Dashboard from './Dashboard';
@@ -34,14 +35,19 @@ const Navbar = (props) => {
                     <li className="nav-item">
                         <Link  className="nav-link" to="/SignIn">Sign-In</Link>
                     </li>
+                    
                 )}
                 {!props.isAuthenticated && (        
                     <li className="nav-item">
                         <Link className="nav-link" to="/SignUp">Sign Up </Link>
-                    </li>
-                    
+                    </li> 
                 )}
-          
+
+                 {props.isAuthenticated && (        
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/Post">Add-Post </Link>
+                    </li> 
+                )}         
                 {props.isAuthenticated && (   
                     <button className="btn btn-outline-primary btn-sm" onClick={() => props.signOut()}>Log out</button>
                 )}
@@ -49,6 +55,7 @@ const Navbar = (props) => {
           </div>
         </nav>
         <Route path="/SignUp" component={SignUp} />
+        <Route path="/Post" component={Post} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/dashboard" component={Dashboard} />
        
