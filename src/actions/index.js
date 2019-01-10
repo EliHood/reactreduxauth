@@ -10,6 +10,7 @@ export const signUp = (user) => { return (dispatch) => {
     firebaseAuth.createUserWithEmailAndPassword(user.email.trim(), user.password)
      .then(resp => {
             return fire.collection('users').doc(resp.user.uid).set({
+              username:user.username,
               email: user.email,
               password: user.password,
               uid: resp.user.uid

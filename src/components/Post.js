@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import { Redirect, withRouter} from "react-router-dom";
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 class Post extends Component {
 

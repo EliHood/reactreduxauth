@@ -3,6 +3,8 @@ import {withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {signIn} from  '../actions/';
 import PropTypes, { func, bool} from 'prop-types';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 class SignIn extends Component{
 
     constructor(props){
@@ -68,29 +70,33 @@ class SignIn extends Component{
                                 : null}
                         </div>
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input
-                                name="email" 
-                                type="email"
-                                className="form-control"
-                                id="exampleInputEmail1"
-                                onChange={this.handleChange}
-                                aria-describedby="emailHelp"
-                                placeholder="Enter email"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input
-                                name="password"
-                                onChange={this.handleChange}
-                                type="password"
-                                className="form-control"
-                                id="exampleInputPassword1"
-                                placeholder="Password"/>
-                        </div>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="Enter Email"
+                            style={{width: 400}}
+                            type="name"
+                            name="email"
+                            id="email"
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                            />
+                    
 
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="Enter Password"
+                            style={{width: 400}}
+                            type="password"
+                            name="password"
+                            id="password"
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                        />
+                            <br></br>
+                            <br></br>
+                        <button className="btn btn-outline-primary myForm">Submit</button>    
                     </form>
                 </div>
 

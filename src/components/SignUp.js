@@ -5,6 +5,10 @@ import {signUp, CurrentUser, onEmailSignUpChangeAction, onPasswordSignUpChangeAc
 import '../App.css';
 import { history } from '../components/Navbar';
 import PropTypes, { func, bool} from 'prop-types';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +16,8 @@ class SignUp extends Component {
         this.state = {
             formData: { // set up default form values
                 email: "",
-                password: ""
+                password: "",
+                username:""
             },
             errors: {}
         }
@@ -35,10 +40,11 @@ class SignUp extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const {formData, errors}=this.state;
-        let  {email, password} = formData;
+        let  {email, password,username} = formData;
         let creds = {
             email,
-            password
+            password,
+            username
         }
         // console.log(creds);
        this.props.signUp(creds);
@@ -62,33 +68,47 @@ class SignUp extends Component {
                                 : null}
                         </div>
                         <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">Email address</label>
-                                <input
-                                    name="email"
-                                    type="email"
-                                    className="form-control"
-                                    id="email"
-                                    value={this.state.formData.email}
-                                    onChange={this.handleChange}
-                                    aria-describedby="emailHelp"
-                                    placeholder="Enter email"/>
-                                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Password</label>
-                                <div></div>
-                                <input
-                                    name="password"
-                                    type="password"
-                                    value={this.state.formData.password}
-                                    onChange={this.handleChange}
-                                    className="form-control"
-                                    id="password"
-                                    placeholder="Password"/>
 
-                            </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <TextField
+                                id="outlined-multiline-static"
+                                label="Enter Username"
+                                style={{width: 400}}
+                                type="name"
+                                name="username"
+                                id="username"
+                                value={this.state.formData.username}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                            />
+                           <TextField
+                                id="outlined-multiline-static"
+                                label="Enter Email"
+                                style={{width: 400}}
+                                type="name"
+                                name="email"
+                                id="email"
+                                value={this.state.formData.email}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                               />
+                      
+                            <TextField
+                                id="outlined-multiline-static"
+                                label="Enter Password"
+                                style={{width: 400}}
+                                type="password"
+                                name="password"
+                                id="password"
+                                value={this.state.formData.password}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                            />
+                               <br></br>
+                               <br></br>
+                           <button className="btn btn-outline-primary myForm">Submit</button>                          
                         </form>
                     </div>
 

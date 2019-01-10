@@ -18,8 +18,15 @@
   color: white;
 }
 
-
-
+.myForm{
+  border-color: #3f51b5;
+  color:#3f51b5;
+}
+.myForm:hover{
+  border-color: #3f51b5;
+  background-color: #3f51b5;
+  color:#fff;
+}
 .red-text{
   color:red;
 }
