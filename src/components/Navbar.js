@@ -48,7 +48,7 @@ const Navbar = (props) => {
 
                  {props.isAuthenticated && (        
                     <li className="nav-item">
-                        <Link className="nav-link" to="/Post">Add-Post </Link>
+                        <Link className="nav-link" to="/post">Add-Post </Link>
                     </li> 
                 )}         
                 {props.isAuthenticated && (   
@@ -59,7 +59,7 @@ const Navbar = (props) => {
           </div>
         </nav>
         <Route path="/SignUp" component={SignUp} />
-        <Route path="/Post" component={Post} />
+        <Route path="/post" component={Post} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/dashboard" component={Dashboard} />
        
