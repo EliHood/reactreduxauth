@@ -46,8 +46,8 @@ class Dashboard extends Component{
         return(
             <div className="container"> 
                 <div className="row">
-                    <div className="col-md-6">
-                        <h1>Welcome {this.state.username}</h1>
+                    <div className="col-md-6 mt-3">
+                        <h1>Welcome {this.state.username.toLowerCase()}</h1>
                     </div>
                 </div>
             </div>
