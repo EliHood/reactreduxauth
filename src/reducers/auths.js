@@ -1,10 +1,11 @@
 import { SET_USER} from '../actions/';
-import { CurrentUser } from "../actions";
+import { CurrentUser, getUser} from "../actions";
 
 const initialState = {
     authError: null,
     isAuthenticated: false,
-    userId: null
+    userId: null,
+    user: {}
 }
 
 export default (state = initialState, action) => {
@@ -12,7 +13,12 @@ export default (state = initialState, action) => {
         case SET_USER:
             return ({
                 userId: action.payload.uid || null,
+                // user:action.payload,
                 isAuthenticated: true
+            })
+        case 'GET_USER':
+            return({
+                user:action.payload
             })
             
         case 'LOGOUT_SUCCESS':

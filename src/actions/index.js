@@ -60,10 +60,11 @@ export const CurrentUser = () => dispatch => {
             dispatch({
                 type: SET_USER, 
                 payload: user
-            }); 
+            })
         }
       });
     
 }
+
 
 

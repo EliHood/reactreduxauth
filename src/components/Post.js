@@ -54,7 +54,6 @@ class Post extends Component {
                             defaultValue=""
                             margin="normal"
                             variant="outlined"
-                            floatingLabelText="Title"
                             onChange={this.handleChange}
                         
                         />
