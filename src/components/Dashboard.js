@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { CurrentUser } from "../actions/";
 import {fire} from '../firebaseConfig';
 import { connect} from "react-redux";
+import  '../index.css';
 import {withRouter, Redirect} from "react-router-dom";
 class Dashboard extends Component{
 
@@ -9,21 +10,20 @@ class Dashboard extends Component{
         super(props)
 
         this.state = {
-            username:""
+            username:"",
+            loading: true
         }
 
     }
-
-  
 
     componentDidMount(){
         if(this.props.userId){
             const collection = fire.collection('users');
             collection.get().then(snapshot => {     
               snapshot.forEach(doc => { 
-                console.log( doc.data().username);  
                 this.setState({
-                    username: doc.data().username
+                    username: doc.data().username,
+                    loading:false
                 })        
             
               });
@@ -36,6 +36,13 @@ class Dashboard extends Component{
 
     render(){
         if (!this.props.userId) return <Redirect to='/' />
+        const { loading } = this.state;
+
+        if(loading){
+           return(
+            <div className="loader"></div>
+           ) 
+        }
         return(
             <div className="container"> 
                 <div className="row">

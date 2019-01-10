@@ -23,13 +23,16 @@ const Navbar = (props) => {
     
           <div className="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
             <ul className="navbar-nav">
-
+            {!props.isAuthenticated && ( 
                 <li className="nav-item">
                     <Link  className="nav-link" to="/">Home </Link>
                 </li>  
+            )}
+             {props.isAuthenticated && (   
                 <li className="nav-item">
                     <Link  className="nav-link" to="/dashboard">Dashboard </Link>
                 </li>
+            )}
 
                 {!props.isAuthenticated && (
                     <li className="nav-item">
@@ -51,6 +54,7 @@ const Navbar = (props) => {
                 {props.isAuthenticated && (   
                     <button className="btn btn-outline-primary btn-sm" onClick={() => props.signOut()}>Log out</button>
                 )}
+     
             </ul>
           </div>
         </nav>

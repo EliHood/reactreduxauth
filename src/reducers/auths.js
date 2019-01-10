@@ -16,11 +16,6 @@ export default (state = initialState, action) => {
                 // user:action.payload,
                 isAuthenticated: true
             })
-        case 'GET_USER':
-            return({
-                user:action.payload
-            })
-            
         case 'LOGOUT_SUCCESS':
             console.log('signout success')
             return ({
