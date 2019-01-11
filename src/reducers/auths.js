@@ -11,6 +11,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case SET_USER:
             return ({
+                ...state,
                 userId: action.payload.uid || null,
                 // user:action.payload,
                 isAuthenticated: true

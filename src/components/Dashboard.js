@@ -26,11 +26,22 @@ const styles = {
   }
 };
 
+const equalArrays = (arr1, arr2) => {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+    return true;
+}
+
 class Dashboard extends Component{
 
     constructor(props){
         super(props)
-
+        
+        this._isMounted = false;
         this.state = {
             username:"",
             loading: true,
@@ -38,24 +49,13 @@ class Dashboard extends Component{
         }
 
     }
-    componentWillMount(){
-        this.props.getPosts();
-        const {posts} = this.state;
-        let myPosts = this.props.myPosts;
-        
-        myPosts.forEach((item)=>{
-            posts.push(item)
-
-        })
-
-    }
-
- 
   
     componentDidMount(){
+        this._isMounted = true;
         if(this.props.userId){
             const collection = fire.collection('users');
-            collection.get().then(snapshot => {     
+            collection.get().then(snapshot => {
+            if(!this._isMounted){return }
               snapshot.forEach(doc => { 
                 this.setState({
                     username: doc.data().username,
@@ -66,8 +66,23 @@ class Dashboard extends Component{
   
         }
 
+        this.props.getPosts();
+
     }
 
+    componentWillMount(){
+        this._isMounted = false;
+    }
+
+    componentDidUpdate(prevProps) {
+        const prevMyPosts = prevProps.myPosts;
+        const myPosts = this.props.myPosts;
+
+        if (!equalArrays(prevMyPosts, myPosts)) {
+            this.setState({ posts: myPosts })
+        }
+    }
+ 
     render(){
         if (!this.props.userId) return <Redirect to='/' />
         const { loading, posts } = this.state;
