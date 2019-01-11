@@ -3,7 +3,8 @@ const initialState = {
     authError: null,
     isAuthenticated: false,
     userId: null,
-    user: {}
+    user: {},
+    myPosts:[]
 }
 
 export default (state = initialState, action) => {
@@ -20,7 +21,13 @@ export default (state = initialState, action) => {
                 ...state,
                 userId: null,
                 isAuthenticated: false
-            })    
+            })   
+        case 'GET_POSTS':
+            return ({
+                ...state,
+                myPosts: action.posts
+            })
+
 
         case 'CREATE_POST': 
             console.log('created post', action.post)

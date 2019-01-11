@@ -5,6 +5,7 @@ import moment from 'moment';
 import  '../index.css';
 import {withRouter, Redirect} from "react-router-dom";
 import Card from '@material-ui/core/Card';
+import {getPosts} from '../actions'
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
@@ -33,45 +34,23 @@ class Dashboard extends Component{
         this.state = {
             username:"",
             loading: true,
-            posts:{},
-            isMounted: false
+            posts:[]
         }
 
     }
     componentWillMount(){
-        this.getPosts();
+        this.props.getPosts();
+        const {posts} = this.state;
+        let myPosts = this.props.myPosts;
+        
+        myPosts.forEach((item)=>{
+            posts.push(item)
 
-        this.setState({
-            isMounted: true
         })
-    }
 
-    componentWillUnmount() {
-         this.setState({
-            isMounted: false,
-            posts:"",
-            username: "",
-            loading: false,
-        })
     }
 
  
-    getPosts() {
-        const collection2 = fire.collection('posts');
-        collection2.get().then(snapshot => {
-            let arr = [];
-            snapshot.forEach(doc => { 
-                arr.push(doc.data()); //Collect all the items and push it into the array
-            })
-            this.setState({
-                posts: arr,
-            })
-            console.log(this.state.posts)
-        })
-       
-        
-    }
-
   
     componentDidMount(){
         if(this.props.userId){
@@ -103,7 +82,7 @@ class Dashboard extends Component{
                 <div className="row">
                     <div className="col-md-6 mt-3">
                         <h1>Welcome {this.state.username.toLowerCase()}</h1>
-                        
+                  
                         {posts.map((post, key)=> {
                             return(
                                  <Card key={key} style={styles.card}>
@@ -123,7 +102,7 @@ class Dashboard extends Component{
                                     </CardContent>
                                 </Card>
                             ); 
-                        })}
+                        })} 
                     </div>
                 </div>
             </div>
@@ -137,8 +116,12 @@ class Dashboard extends Component{
 
 const mapStateToProps = (state) => ({
     user: state.auths.user,
-    userId: state.auths.userId
+    userId: state.auths.userId,
+    myPosts: state.auths.myPosts
 })
-  
 
-export default withRouter(connect(mapStateToProps, null)(Dashboard));
+const mapDispatchToProps = (dispatch) => ({
+    getPosts: () => dispatch(getPosts())
+})
+
+export default withRouter(connect(mapStateToProps,  mapDispatchToProps)(Dashboard));

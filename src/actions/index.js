@@ -81,3 +81,24 @@ export const createPost = (post) => {
     }
 }
 
+
+const _getPosts = (posts) => ({
+    type: 'GET_POSTS',
+    posts
+})
+
+export const getPosts = () => { return(dispatch) =>{
+    return fire.collection('posts').get().then(snapshot => {
+        const posts = [];
+
+        snapshot.forEach(item => {
+            posts.push(item.data());
+        });
+
+        // console.log(posts)
+
+        dispatch(_getPosts(posts));
+    })
+
+ }
+}
