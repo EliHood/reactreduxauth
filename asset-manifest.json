@@ -1,13 +1,13 @@
 {
-  "main.css": "/reactreduxauth/static/css/main.2de408e9.chunk.css",
-  "main.js": "/reactreduxauth/static/js/main.72901c04.chunk.js",
-  "main.js.map": "/reactreduxauth/static/js/main.72901c04.chunk.js.map",
-  "static/js/1.c9736e9b.chunk.js": "/reactreduxauth/static/js/1.c9736e9b.chunk.js",
-  "static/js/1.c9736e9b.chunk.js.map": "/reactreduxauth/static/js/1.c9736e9b.chunk.js.map",
+  "main.css": "/reactreduxauth/static/css/main.15bc5925.chunk.css",
+  "main.js": "/reactreduxauth/static/js/main.65285587.chunk.js",
+  "main.js.map": "/reactreduxauth/static/js/main.65285587.chunk.js.map",
+  "static/js/1.b1960d42.chunk.js": "/reactreduxauth/static/js/1.b1960d42.chunk.js",
+  "static/js/1.b1960d42.chunk.js.map": "/reactreduxauth/static/js/1.b1960d42.chunk.js.map",
   "runtime~main.js": "/reactreduxauth/static/js/runtime~main.6bfdbf41.js",
   "runtime~main.js.map": "/reactreduxauth/static/js/runtime~main.6bfdbf41.js.map",
-  "static/css/main.2de408e9.chunk.css.map": "/reactreduxauth/static/css/main.2de408e9.chunk.css.map",
+  "static/css/main.15bc5925.chunk.css.map": "/reactreduxauth/static/css/main.15bc5925.chunk.css.map",
   "index.html": "/reactreduxauth/index.html",
-  "precache-manifest.27a45d4a8548e07f385e1fc0a6b7019f.js": "/reactreduxauth/precache-manifest.27a45d4a8548e07f385e1fc0a6b7019f.js",
+  "precache-manifest.2f4cc9ed9d3f1b610d627f392ac460fa.js": "/reactreduxauth/precache-manifest.2f4cc9ed9d3f1b610d627f392ac460fa.js",
   "service-worker.js": "/reactreduxauth/service-worker.js"
 }
