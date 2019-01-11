@@ -1,8 +1,6 @@
 import { auth as firebaseAuth } from '../firebaseConfig'
 import {fire} from '../firebaseConfig'
-import { push } from 'react-router-redux';
 import { history } from '../components/Navbar';
-import { getFirebase } from 'react-redux-firebase';
 
 export const SET_USER = "SET_USER";
 
@@ -66,5 +64,20 @@ export const CurrentUser = () => dispatch => {
     
 }
 
-
+export const createPost = (post) => {
+    return (dispatch, getState) => {
+        // async call to the database
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth;
+        fire.collection('posts').add({
+            description: post.description,
+            username: post.username,
+            createdAt: new Date()
+        }).then(() => {
+            dispatch({type: 'CREATE_POST', post})
+        }).catch((err) => {
+            dispatch({type: 'CREATE_POST_ ERROR', err})
+        })
+    }
+}
 

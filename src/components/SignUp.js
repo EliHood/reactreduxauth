@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {signUp, CurrentUser, onEmailSignUpChangeAction, onPasswordSignUpChangeAction} from '../actions/';
+import {signUp} from '../actions/';
 import '../App.css';
-import { history } from '../components/Navbar';
 import PropTypes, { func, bool} from 'prop-types';
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 class SignUp extends Component {
@@ -39,7 +37,7 @@ class SignUp extends Component {
     // ...
     handleSubmit(event) {
         event.preventDefault();
-        const {formData, errors}=this.state;
+        const {formData}=this.state;
         let  {email, password,username} = formData;
         let creds = {
             email,
@@ -75,7 +73,6 @@ class SignUp extends Component {
                                 style={{width: 400}}
                                 type="name"
                                 name="username"
-                                id="username"
                                 value={this.state.formData.username}
                                 margin="normal"
                                 variant="outlined"
@@ -87,7 +84,6 @@ class SignUp extends Component {
                                 style={{width: 400}}
                                 type="name"
                                 name="email"
-                                id="email"
                                 value={this.state.formData.email}
                                 margin="normal"
                                 variant="outlined"
@@ -100,7 +96,6 @@ class SignUp extends Component {
                                 style={{width: 400}}
                                 type="password"
                                 name="password"
-                                id="password"
                                 value={this.state.formData.password}
                                 margin="normal"
                                 variant="outlined"

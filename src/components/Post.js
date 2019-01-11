@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter} from "react-router-dom";
-import Button from '@material-ui/core/Button';
+import {fire} from '../firebaseConfig';
 import TextField from '@material-ui/core/TextField';
+import {createPost} from '../actions/';
+
 class Post extends Component {
 
     constructor(props){
@@ -10,19 +12,33 @@ class Post extends Component {
 
         this.state = {
             description: '',
+            username: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillMount(){
+      
+        const collection = fire.collection('users');
+        collection.get().then(snapshot => {     
+            snapshot.forEach(doc => { 
+                this.setState({
+                    username: doc.data().username,
+                })        
+            
+            });
+           
+        });
+       
+    }
+
     handleChange = (e) => {
         e.preventDefault();
 
         this.setState({
-            description:{
-                [e.target.name] : [e.target.value]
-            }
+           [e.target.name]: e.target.value
         })
 
 
@@ -31,14 +47,21 @@ class Post extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
-
+        let description = this.state.description
+        let username = this.state.username
+        const post = {
+            description,
+            username
+        }
+        
+        this.props.createPost(post)
+        this.props.history.push('/dashboard')
 
     }
 
     render(){
         const {userId} = this.props
-        if (!this.props.userId) return <Redirect to='/' />
+        if (!userId) return <Redirect to='/' />
         return(
         <div className="container">
             <div className="row">
@@ -50,6 +73,7 @@ class Post extends Component {
                             label="Enter Description"
                             multiline
                             rows="4"
+                            name="description"
                             style = {{width: 700}} 
                             defaultValue=""
                             margin="normal"
@@ -58,22 +82,16 @@ class Post extends Component {
                         
                         />
                         <br />
-                        {this.state.registerError && (
-                        <div className="alert alert-danger" role="alert">
-                            <span
-                            className="glyphicon glyphicon-exclamation-sign"
-                            aria-hidden="true"
-                            />
-                            <span className="sr-only">Error:</span>
-                            &nbsp;{this.state.registerError}
-                        </div>
-                        )}
+                    
                         <br></br>
-                        <Button variant="contained" color="primary">
-                            Submit
-                        </Button>
+                    
+                        <button className="btn btn-outline-primary myForm">Submit</button>   
+                     
                     </form> 
                 </div>
+
+
+            
             </div>
         </div>
      
@@ -85,9 +103,13 @@ class Post extends Component {
 
 
 const mapStateToProps = (state) => ({
-    userId: state.auths.userId
+    userId: state.auths.userId,
+    user: state.auths.user
 })
 
+const mapDispatchToProps = (dispatch) => ({
+    createPost: (post) => dispatch(createPost(post))
 
+});
 
-export default withRouter(connect(mapStateToProps, null)(Post));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Post));

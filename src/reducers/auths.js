@@ -1,6 +1,4 @@
 import { SET_USER} from '../actions/';
-import { CurrentUser, getUser} from "../actions";
-
 const initialState = {
     authError: null,
     isAuthenticated: false,
@@ -23,6 +21,14 @@ export default (state = initialState, action) => {
                 userId: null,
                 isAuthenticated: false
             })    
+
+        case 'CREATE_POST': 
+            console.log('created post', action.post)
+            return state;
+
+        case 'CREATE_POST_ERROR':
+            console.log('create post error', action.err)
+            return state;   
 
         case 'SIGNUP_SUCCESS':      
             return ({

@@ -1,9 +1,30 @@
 import React, {Component} from 'react';
-import { CurrentUser } from "../actions/";
 import {fire} from '../firebaseConfig';
 import { connect} from "react-redux";
+import moment from 'moment';
 import  '../index.css';
 import {withRouter, Redirect} from "react-router-dom";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+const styles = {
+  card: {
+    minWidth: 275,
+    margin:'40px 0px',
+
+  },
+  p:{
+      margin:'20px 0px',
+      letterSpacing: '2.7px',
+      fontSize:'0.8em',
+      fontStyle: 'italic'
+  },
+  h:{
+    letterSpacing: '5px' 
+  }
+};
+
 class Dashboard extends Component{
 
     constructor(props){
@@ -11,11 +32,47 @@ class Dashboard extends Component{
 
         this.state = {
             username:"",
-            loading: true
+            loading: true,
+            posts:{},
+            isMounted: false
         }
 
     }
+    componentWillMount(){
+        this.getPosts();
 
+        this.setState({
+            isMounted: true
+        })
+    }
+
+    componentWillUnmount() {
+         this.setState({
+            isMounted: false,
+            posts:"",
+            username: "",
+            loading: false,
+        })
+    }
+
+ 
+    getPosts() {
+        const collection2 = fire.collection('posts');
+        collection2.get().then(snapshot => {
+            let arr = [];
+            snapshot.forEach(doc => { 
+                arr.push(doc.data()); //Collect all the items and push it into the array
+            })
+            this.setState({
+                posts: arr,
+            })
+            console.log(this.state.posts)
+        })
+       
+        
+    }
+
+  
     componentDidMount(){
         if(this.props.userId){
             const collection = fire.collection('users');
@@ -24,19 +81,17 @@ class Dashboard extends Component{
                 this.setState({
                     username: doc.data().username,
                     loading:false
-                })        
-            
-              });
-            
+                })                 
+              });   
             });
+  
         }
-
 
     }
 
     render(){
         if (!this.props.userId) return <Redirect to='/' />
-        const { loading } = this.state;
+        const { loading, posts } = this.state;
 
         if(loading){
            return(
@@ -48,6 +103,27 @@ class Dashboard extends Component{
                 <div className="row">
                     <div className="col-md-6 mt-3">
                         <h1>Welcome {this.state.username.toLowerCase()}</h1>
+                        
+                        {posts.map((post, key)=> {
+                            return(
+                                 <Card key={key} style={styles.card}>
+                                        <CardContent>
+
+                                        <Typography variant="h4" component="h2" style={styles.h}>
+                                            {post.description}
+                                        </Typography>
+                                        <Typography component="p" style={styles.p}>
+                                            by: {post.username}
+                                        </Typography>
+
+                                        <Typography component="p">
+                                            by: {moment(post.createdAt.toDate()).calendar()}
+                                        </Typography>
+                                                                    
+                                    </CardContent>
+                                </Card>
+                            ); 
+                        })}
                     </div>
                 </div>
             </div>

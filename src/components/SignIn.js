@@ -3,7 +3,6 @@ import {withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {signIn} from  '../actions/';
 import PropTypes, { func, bool} from 'prop-types';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 class SignIn extends Component{
 
@@ -35,7 +34,7 @@ class SignIn extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();  
-        const {formData, errors} = this.state;
+        const {formData} = this.state;
         const {email, password} = formData;
 
         const creds = {
@@ -76,7 +75,6 @@ class SignIn extends Component{
                             style={{width: 400}}
                             type="name"
                             name="email"
-                            id="email"
                             margin="normal"
                             variant="outlined"
                             onChange={this.handleChange} 
@@ -89,7 +87,6 @@ class SignIn extends Component{
                             style={{width: 400}}
                             type="password"
                             name="password"
-                            id="password"
                             margin="normal"
                             variant="outlined"
                             onChange={this.handleChange} 
