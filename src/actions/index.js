@@ -88,7 +88,7 @@ const _getPosts = (posts) => ({
 })
 
 export const getPosts = () => { return(dispatch) =>{
-    return fire.collection('posts').get().then(snapshot => {
+    return fire.collection('posts').orderBy('createdAt', 'desc').get().then(snapshot => {
         const posts = [];
 
         snapshot.forEach(item => {
