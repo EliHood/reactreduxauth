@@ -53,17 +53,40 @@ export const signOut = () => { return (dispatch) => {
 
 
 export const CurrentUser = () => dispatch => {
+    
     firebaseAuth.onAuthStateChanged((user) => {
         if (user) {
             dispatch({
                 type: SET_USER, 
                 payload: user
             })
+            // console.log(user)
         }
       });
     
 }
 
+
+
+
+// export const setUser = (users) => { return(dispatch) =>{
+
+//     return fire.collection('users').get().then(snapshot => {
+//         const users = [];
+
+//         snapshot.forEach(item => {
+//             users.push(item.data());
+//         });
+
+
+//         dispatch(_getUsers(users));
+//     })
+
+
+
+//     }
+
+// }
 export const createPost = (post) => {
     return (dispatch, getState) => {
         // async call to the database

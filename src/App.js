@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar';
-import { CurrentUser } from "./actions";
+import { CurrentUser} from "./actions";
 import { connect } from "react-redux";
 import  './index.css';
 
@@ -14,6 +14,8 @@ class App extends Component {
     }
     componentWillMount() {
         this.props.CurrentUser();
+        
+    
 
         this.setState({
             loading:false
@@ -35,6 +37,6 @@ class App extends Component {
 }
 
 
-export default connect(null, { CurrentUser })(App);
+export default connect(null, { CurrentUser})(App);
 
 

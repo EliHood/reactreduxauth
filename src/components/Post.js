@@ -18,21 +18,28 @@ class Post extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
     componentWillMount(){
+
+        const currentUserId = this.props.userId
       
         const collection = fire.collection('users');
         collection.get().then(snapshot => {     
             snapshot.forEach(doc => { 
-                this.setState({
-                    username: doc.data().username,
-                })        
-            
+                if(doc.data().uid === currentUserId){
+                    this.setState({
+                        username: doc.data().username,
+                    })    
+
+                }       
             });
            
         });
+
+        
        
     }
+
 
     handleChange = (e) => {
         e.preventDefault();
@@ -108,7 +115,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    createPost: (post) => dispatch(createPost(post))
+    createPost: (post) => dispatch(createPost(post)),
 
 });
 

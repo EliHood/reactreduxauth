@@ -1,9 +1,10 @@
 import { SET_USER} from '../actions/';
+import { actionTypes } from 'react-redux-firebase';
 const initialState = {
     authError: null,
     isAuthenticated: false,
     userId: null,
-    user: {},
+    user: [],
     myPosts:[]
 }
 
@@ -13,9 +14,11 @@ export default (state = initialState, action) => {
             return ({
                 ...state,
                 userId: action.payload.uid || null,
-                // user:action.payload,
+                user:action.user,
                 isAuthenticated: true
             })
+
+
         case 'LOGOUT_SUCCESS':
             console.log('signout success')
             return ({
