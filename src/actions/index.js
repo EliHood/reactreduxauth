@@ -87,11 +87,11 @@ export const CurrentUser = () => dispatch => {
 //     }
 
 // }
+
+// 
 export const createPost = (post) => {
     return (dispatch, getState) => {
         // async call to the database
-        const profile = getState().firebase.profile;
-        const authorId = getState().firebase.auth;
         fire.collection('posts').add({
             description: post.description,
             username: post.username,

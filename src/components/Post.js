@@ -19,13 +19,15 @@ class Post extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
+    // I want to use the method in this component inside of my actions file in redux, now sure how to do this though. 
     componentWillMount(){
-
+        // gets the current userId. 
         const currentUserId = this.props.userId
-      
+       // gets the users
         const collection = fire.collection('users');
         collection.get().then(snapshot => {     
             snapshot.forEach(doc => { 
+                // if user id matches the logged in user id select the data
                 if(doc.data().uid === currentUserId){
                     this.setState({
                         username: doc.data().username,
@@ -110,8 +112,7 @@ class Post extends Component {
 
 
 const mapStateToProps = (state) => ({
-    userId: state.auths.userId,
-    user: state.auths.user
+    userId: state.auths.userId
 })
 
 const mapDispatchToProps = (dispatch) => ({
